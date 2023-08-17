@@ -19,8 +19,13 @@ class MockHTTPResponse(object):  # noqa: D101
         self.msg = p.parsestr(h)
         self.msg.set_payload(h)
 
+        self.__closed = False
+
     def isclosed(self):  # noqa: D102
-        return False
+        return self.__closed
+
+    def close(self):  # noqa: D102
+        self.__closed = True
 
 
 class EmailMessage(message.Message):  # noqa: D101
